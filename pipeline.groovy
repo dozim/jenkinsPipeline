@@ -28,7 +28,8 @@ node {
         git 'https://github.com/dozim/helloJenkins.git'
     }
     stage('Print Commit Hash') {
-        echo "${env.GIT_BRANCH}"
+        def commitHash = checkout(scm).GIT_COMMIT
+        echo commitHash
     }
     stage('compile') {
         maven.run pom: 'pom.xml', goals: '-B compile', buildInfo: info
